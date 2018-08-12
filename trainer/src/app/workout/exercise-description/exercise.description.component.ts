@@ -2,14 +2,14 @@ import { Component,OnInit,Input,ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector:'exercise-description',
-	template:'Description: {{description}}',
+	templateUrl:'./exercise.description.component.html',
 	styles:[]
 })
 
 
 export  class ExerciseDescriptionComponent implements OnInit{
 	@Input() description: string;
-	 steps: string;
+	@Input() steps: string;
 	constructor(){}
 	ngOnInit(){}
 }

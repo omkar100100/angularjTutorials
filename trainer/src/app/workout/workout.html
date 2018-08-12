@@ -1,8 +1,11 @@
-
+ <h1 class="text-center">{{currentExercise.exercise.title}}</h1>
  <div class="row pt-4">
   <div id="description-panel" class="col-sm-3">
      <label>Current Exercise: {{ currentExercise.exercise | json }}</label>
-	 <exercise-description [description]="currentExercise.exercise.description"></exercise-description>
-
+	 <exercise-description [description]="currentExercise.exercise.description" [steps]="currentExercise.exercise.procedure"></exercise-description>
     </div>
  </div>
+ 
+   <div id="video-panel" class="col-sm-3">
+    <abe-video-player [videos]="currentExercise.exercise.videos"></abe-video-player>
+  </div>
