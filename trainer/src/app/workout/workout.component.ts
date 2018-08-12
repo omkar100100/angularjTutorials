@@ -1,9 +1,10 @@
 import { WorkoutPlan,ExercisePlan,Exercise } from './model';
 import { Component,OnInit,ViewEncapsulation } from '@angular/core';
 
+
 @Component({
 	selector:'workout-runner',
-	template:'<pre>Current Exercise{{ currentExercise | json }}</pre>',
+	templateUrl:'./workout.html',
 	styles:[]
 })
 
