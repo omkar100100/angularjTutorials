@@ -10,6 +10,19 @@ import { Component,OnInit,Input,ViewEncapsulation } from '@angular/core';
 export  class ExerciseDescriptionComponent implements OnInit{
 	@Input() description: string;
 	@Input() steps: string;
+	
+	timesContentRequested:number;
+	
 	constructor(){}
-	ngOnInit(){}
+	ngOnInit(){
+		this.timesContentRequested=0;
+	}
+	
+	getContent(){
+		
+		this.timesContentRequested +=1;
+		return "hello world";;
+	}
+	
+	
 }

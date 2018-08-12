@@ -16,6 +16,8 @@ export class WorkOutComponent implements OnInit{
   currentExerciseIndex: number;
   currentExercise: ExercisePlan;
   exerciseRunningDuration: number;
+  exerciseTrackingInterval: number;
+   workoutPaused: boolean;
   
   constructor(){}
   
@@ -30,6 +32,55 @@ export class WorkOutComponent implements OnInit{
     this.currentExerciseIndex = 0;
     this.startExercise(this.workoutPlan.exercises[this.currentExerciseIndex]);
   }
+  
+   pause() {
+    clearInterval(this.exerciseTrackingInterval);
+    this.workoutPaused = true;
+  }
+  
+  resume() {
+    this.startExerciseTimeTracking();
+    this.workoutPaused = false;
+  }
+  
+   pauseResumeToggle() {
+    if (this.workoutPaused) {
+      this.resume();
+    }
+    else {
+      this.pause();
+    }
+  }
+  
+  onKeyPressed(event:KeyboardEvent){
+	  if(event.which===80 || event.which===112){
+		  this.pauseResumeToggle();
+	  }
+	  
+  }
+  
+  
+   startExerciseTimeTracking() {
+    this.exerciseTrackingInterval = window.setInterval(() => {
+      if (this.exerciseRunningDuration >= this.currentExercise.duration) {
+        clearInterval(this.exerciseTrackingInterval);
+        const next: ExercisePlan = this.getNextExercise();
+        if (next) {
+          if (next !== this.restExercise) {
+            this.currentExerciseIndex++;
+          }
+          this.startExercise(next);
+        }
+        else {
+          console.log('Workout complete!');
+        }
+        return;
+      }
+      ++this.exerciseRunningDuration;
+      --this.workoutTimeRemaining;
+    }, 1000);
+  }
+
   
    startExercise(exercisePlan: ExercisePlan) {
     this.currentExercise = exercisePlan;
